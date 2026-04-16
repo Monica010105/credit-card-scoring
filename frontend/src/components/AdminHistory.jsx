@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { Menu, RefreshCw, Users, TrendingUp } from 'lucide-react';
 
-const API_URL = 'http://localhost:8000';
+const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}`;
 
 const COLORS = {
   APPROVE: '#10b981',

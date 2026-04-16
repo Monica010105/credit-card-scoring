@@ -7,7 +7,7 @@ import {
 } from 'recharts';
 import { Menu, RefreshCw, TrendingUp, Users, CheckCircle, XCircle, Clock } from 'lucide-react';
 
-const API_URL = 'http://localhost:8000';
+const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}`;
 
 const COLORS = {
   APPROVE: '#10b981',
