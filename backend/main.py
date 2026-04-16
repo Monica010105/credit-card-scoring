@@ -1,6 +1,6 @@
 import os
 import json
-from fastapi import FastAPI, Depends, HTTPException, status, BackgroundTasks
+from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from datetime import timedelta
@@ -10,7 +10,7 @@ from database import models
 from database.database import engine, get_db
 from schemas import schemas
 from model.predict import make_prediction, get_model
-from model.train import train_models
+import joblib
 
 app = FastAPI(title="Credit Scoring API", version="1.0")
 
@@ -84,16 +84,8 @@ def predict(request: schemas.PredictRequest, db: Session = Depends(get_db)):
     )
 
 @app.post("/train")
-def train(background_tasks: BackgroundTasks):
-    # Run training as a background task
-    def run_train():
-        try:
-            train_models()
-        except Exception as e:
-            print(f"Training failed: {e}")
-            
-    background_tasks.add_task(run_train)
-    return {"message": "Training started in background. Please check /metrics after a while."}
+def train():
+    return {"message": "Training is disabled in production."}
 
 @app.get("/metrics")
 def get_metrics():
@@ -151,4 +143,4 @@ def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True, reload_excludes=["venv", "*.db"])
+    uvicorn.run("main:app", host="0.0.0.0", port=10000, reload=False)
