@@ -38,6 +38,7 @@ export default function UserPanel() {
 
   const [formData, setFormData] = useState({
     name: "",
+    email: "",
     age: "",
     MonthlyIncome: "",
     DebtRatio: "",
@@ -67,7 +68,7 @@ export default function UserPanel() {
     // Convert empty strings to 0 for backend requirements
     const payload = { ...formData };
     Object.keys(payload).forEach(key => {
-      if (key !== 'name') {
+      if (key !== 'name' && key !== 'email') {
         payload[key] = parseFloat(payload[key]) || 0;
       }
     });
@@ -93,6 +94,10 @@ export default function UserPanel() {
             <div className="md:col-span-2">
               <label className="text-sm font-medium text-gray-700 block mb-1">What is your Full Name?</label>
               <input type="text" name="name" value={formData.name || ''} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="input-field bg-gray-50" required placeholder="e.g. Aditi Sharma" />
+            </div>
+            <div className="md:col-span-2">
+              <label className="text-sm font-medium text-gray-700 block mb-1">Email Address (To receive results)</label>
+              <input type="email" name="email" value={formData.email || ''} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="input-field bg-gray-50" required placeholder="e.g. monica01012005@gmail.com" />
             </div>
             <div>
               <label className="text-sm font-medium text-gray-700 block mb-1">How old are you? (Years)</label>
