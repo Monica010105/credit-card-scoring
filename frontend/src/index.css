@@ -86,14 +86,14 @@
   padding: 0.45rem 1.2rem;
   border-radius: 4px;
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: all .2s;
   border: none;
   background: transparent;
-  color: #bfdbfe;
+  color: #2563eb; /* Blue text */
 }
-.hero-nav-btn:hover { color: #fff; }
+.hero-nav-btn:hover { color: #1e3a8a; } /* Darker blue on hover */
 
 .hero-nav-btn--cta {
   background: #dc2626;
