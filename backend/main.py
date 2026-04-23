@@ -11,6 +11,7 @@ from database.database import engine, get_db
 from schemas import schemas
 from model.predict import make_prediction, get_model
 import joblib
+from email_utils import send_registration_email, send_prediction_result_email
 
 app = FastAPI(title="Credit Scoring API", version="1.0")
 
@@ -77,6 +78,13 @@ def predict(request: schemas.PredictRequest, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_record)
     
+    # Send prediction result email
+    if hasattr(request, 'email') and request.email:
+        try:
+            send_prediction_result_email(request.email, data.get("name", "Unknown"), score, decision)
+        except Exception as e:
+            print(f"Error sending email: {e}")
+    
     return schemas.PredictResponse(
         probability=prob,
         credit_score=score,
@@ -126,6 +134,11 @@ def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
+    
+    try:
+        send_registration_email(user.email, user.name)
+    except Exception as e:
+        print(f"Error sending registration email: {e}")
     
     return {"access_token": "user_mock_jwt_token", "token_type": "bearer"}
 

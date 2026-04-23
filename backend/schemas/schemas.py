@@ -5,6 +5,7 @@ from datetime import datetime
 class PredictRequest(BaseModel):
     # Mapping exact required columns for simplicity. We match the model features.
     name: str = "Unknown"
+    email: Optional[str] = None
     RevolvingUtilizationOfUnsecuredLines: float = 0.0
     age: int = 30
     NumberOfTime30_59DaysPastDueNotWorse: int = 0
