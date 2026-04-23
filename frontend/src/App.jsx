@@ -22,26 +22,42 @@ function Navigation() {
   if (isHero) return null;
 
   return (
-    <nav className="bg-blue-800 text-white p-4 shadow-md">
+    <nav className="bg-white border-b-4 border-blue-800 text-blue-900 p-2 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-xl font-bold tracking-tight">⚡ Credit Score AI</h1>
-        {!isAuthRoute && (
-          <div className="space-x-4 flex items-center">
-            {!isAdmin ? (
-              <>
-                <Link to="/app" className="hover:text-blue-200">Loan Application</Link>
-              </>
-            ) : (
-              <>
-                <Link to="/admin/dashboard" className="hover:text-blue-200">Dashboard</Link>
-                <Link to="/admin/history"   className="hover:text-blue-200">History</Link>
-              </>
-            )}
-            <button onClick={handleLogout} className="px-3 py-1 bg-red-600 rounded hover:bg-red-700 text-sm font-semibold ml-4">
-              Logout
-            </button>
-          </div>
-        )}
+        {/* Left Side: Kingston College Logo */}
+        <div className="flex items-center">
+          <img src="/kingston.png" alt="Kingston Engineering College" className="h-16 object-contain" />
+        </div>
+
+        {/* Center: Main App Logo */}
+        <div className="flex flex-col items-center justify-center">
+          <Link to="/">
+            <img src="/logo.png" alt="Credit Score AI" className="h-20 object-contain" />
+          </Link>
+        </div>
+
+        {/* Right Side: Anna University & Navigation Links */}
+        <div className="flex items-center space-x-6">
+          <img src="/anna.png" alt="Anna University" className="h-16 object-contain" />
+          
+          {!isAuthRoute && (
+            <div className="space-x-4 flex items-center ml-4 border-l-2 pl-4 border-gray-200">
+              {!isAdmin ? (
+                <>
+                  <Link to="/app" className="hover:text-blue-600 font-semibold text-sm">Loan Application</Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/admin/dashboard" className="hover:text-blue-600 font-semibold text-sm">Dashboard</Link>
+                  <Link to="/admin/history"   className="hover:text-blue-600 font-semibold text-sm">History</Link>
+                </>
+              )}
+              <button onClick={handleLogout} className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 text-sm font-bold ml-4 shadow">
+                Logout
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   );

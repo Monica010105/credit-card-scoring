@@ -58,9 +58,20 @@ export default function Hero() {
       </div>
 
       {/* ── Navbar ── */}
-      <nav className="hero-nav">
-        <span className="hero-logo">⚡ Credit Score AI</span>
-        <div className="hero-nav-links">
+      <nav className="hero-nav" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', background: 'rgba(255, 255, 255, 0.9)', backdropFilter: 'blur(10px)' }}>
+        {/* Left: Kingston College Logo */}
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <img src="/kingston.png" alt="Kingston Engineering College" style={{ height: '50px', objectFit: 'contain' }} />
+        </div>
+
+        {/* Center: Main App Logo */}
+        <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={() => navigate('/')}>
+          <img src="/logo.png" alt="Credit Score AI" style={{ height: '70px', objectFit: 'contain' }} />
+        </div>
+
+        {/* Right: Anna University & Links */}
+        <div className="hero-nav-links" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <img src="/anna.png" alt="Anna University" style={{ height: '50px', objectFit: 'contain', marginRight: '1rem' }} />
           <button className="hero-nav-btn" onClick={() => navigate('/login')}>Login</button>
           <button className="hero-nav-btn hero-nav-btn--cta" onClick={() => navigate('/register')}>Get Started</button>
         </div>
