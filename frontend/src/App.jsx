@@ -29,10 +29,11 @@ function Navigation() {
           {!hideLogos && <img src="/kingston.png" alt="Kingston Engineering College" className="h-16 object-contain bg-white p-1 rounded" />}
         </div>
 
-        {/* Center: Main App Logo */}
+        {/* Center: Main App Logo & Title */}
         <div className="flex flex-col items-center justify-center">
-          <Link to="/">
-            {!isAuthRoute && <img src="/logo.png" alt="Credit Score AI" className="h-20 object-contain" />}
+          <Link to="/" className="flex items-center gap-3">
+            {!isAuthRoute && <img src="/logo.png" alt="Logo" className="h-12 object-contain" />}
+            {!isAuthRoute && <h1 className="text-2xl font-bold tracking-tight text-blue-900">⚡ Credit Score AI</h1>}
           </Link>
         </div>
 
