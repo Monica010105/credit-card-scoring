@@ -11,6 +11,7 @@ function Navigation() {
   const isAdmin  = location.pathname.startsWith('/admin');
   const isHero   = location.pathname === '/';
   const isAuthRoute = location.pathname === '/login' || location.pathname === '/register';
+  const hideLogos = isAuthRoute || location.pathname === '/app';
 
   const handleLogout = () => {
     localStorage.removeItem('userToken');
@@ -24,21 +25,20 @@ function Navigation() {
   return (
     <nav className="bg-white border-b-4 border-blue-800 text-blue-900 p-2 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        {/* Left Side: Kingston College Logo */}
         <div className="flex items-center">
-          <img src="/kingston.png" alt="Kingston Engineering College" className="h-16 object-contain" />
+          {!hideLogos && <img src="/kingston.png" alt="Kingston Engineering College" className="h-16 object-contain bg-white p-1 rounded" />}
         </div>
 
         {/* Center: Main App Logo */}
         <div className="flex flex-col items-center justify-center">
           <Link to="/">
-            <img src="/logo.png" alt="Credit Score AI" className="h-20 object-contain" />
+            {!isAuthRoute && <img src="/logo.png" alt="Credit Score AI" className="h-20 object-contain" />}
           </Link>
         </div>
 
         {/* Right Side: Anna University & Navigation Links */}
         <div className="flex items-center space-x-6">
-          <img src="/anna.png" alt="Anna University" className="h-16 object-contain" />
+          {!hideLogos && <img src="/anna.png" alt="Anna University" className="h-16 object-contain" />}
           
           {!isAuthRoute && (
             <div className="space-x-4 flex items-center ml-4 border-l-2 pl-4 border-gray-200">

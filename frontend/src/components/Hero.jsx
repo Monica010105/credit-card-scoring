@@ -59,9 +59,8 @@ export default function Hero() {
 
       {/* ── Navbar ── */}
       <nav className="hero-nav" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', background: 'rgba(255, 255, 255, 0.9)', backdropFilter: 'blur(10px)' }}>
-        {/* Left: Kingston College Logo */}
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/kingston.png" alt="Kingston Engineering College" style={{ height: '50px', objectFit: 'contain' }} />
+          <img src="/kingston.png" alt="Kingston Engineering College" style={{ height: '50px', objectFit: 'contain', backgroundColor: '#ffffff', padding: '4px', borderRadius: '4px' }} />
         </div>
 
         {/* Right: Anna University & Links */}
@@ -75,8 +74,8 @@ export default function Hero() {
       {/* ── Hero Content ── */}
       <section className="hero-section">
         {/* Main App Logo Moved to Hero Section */}
-        <div style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}>
-          <img src="/logo.png" alt="Credit Score AI" style={{ height: '110px', objectFit: 'contain' }} />
+        <div style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'center', overflow: 'visible' }}>
+          <img src="/logo.png" alt="Credit Score AI" style={{ width: '320px', height: 'auto', objectFit: 'contain', transform: 'scale(1.8)', transformOrigin: 'center' }} />
         </div>
 
         <div className="hero-badge">🚀 Next-Gen Credit Intelligence</div>
