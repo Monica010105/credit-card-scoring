@@ -11,7 +11,7 @@ function Navigation() {
   const isAdmin  = location.pathname.startsWith('/admin');
   const isHero   = location.pathname === '/';
   const isAuthRoute = location.pathname === '/login' || location.pathname === '/register';
-  const hideLogos = isAuthRoute || location.pathname === '/app';
+  const hideLogos = isAuthRoute || location.pathname === '/app' || isAdmin;
 
   const handleLogout = () => {
     localStorage.removeItem('userToken');
