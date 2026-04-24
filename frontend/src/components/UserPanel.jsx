@@ -14,14 +14,14 @@ function ScoreGauge({ score }) {
   return (
     <div className="flex flex-col items-center justify-center p-4">
       <div className="relative w-48 h-24 overflow-hidden">
-        <div className="absolute top-0 left-0 w-48 h-48 border-8 border-blue-400/30 rounded-full"></div>
+        <div className="absolute top-0 left-0 w-48 h-48 border-8 border-gray-200 rounded-full"></div>
         <div 
           className={`absolute top-0 left-0 w-48 h-48 border-8 border-transparent border-t-current border-l-current rounded-full transition-transform duration-1000 ease-out ${colorClass}`}
           style={{ transform: `rotate(${rotation}deg)` }}
         ></div>
       </div>
-      <div className="mt-4 text-3xl font-bold text-white">{score.toFixed(1)} / 100</div>
-      <div className="text-blue-200 uppercase text-xs mt-1">Your Credit Score</div>
+      <div className="mt-4 text-3xl font-bold">{score.toFixed(1)} / 100</div>
+      <div className="text-gray-500 uppercase text-xs mt-1">Your Credit Score</div>
     </div>
   );
 }
@@ -167,33 +167,33 @@ export default function UserPanel() {
       </div>
 
       <div className="w-full lg:w-1/3 space-y-6">
-        <div className="p-6 rounded-lg border border-blue-500 text-center min-h-[450px] flex flex-col items-center justify-center bg-blue-600 text-white shadow-xl shadow-blue-900/10">
+        <div className="card text-center min-h-[450px] flex flex-col items-center justify-center bg-gradient-to-b from-white to-gray-50 border-t-4 border-t-blue-600">
           {result ? (
             <div className="animate-fade-in w-full">
-              <h3 className="text-xl font-bold text-white mb-6">AI Decision Summary</h3>
+              <h3 className="text-xl font-bold text-gray-700 mb-6">AI Decision Summary</h3>
               
               <ScoreGauge score={result.credit_score} />
               
-              <div className="mt-8 p-5 rounded-xl bg-white/10 shadow-sm border border-white/20 backdrop-blur-sm">
-                <div className="text-xs text-blue-200 uppercase tracking-widest font-semibold mb-2">Likelihood of Defaulting</div>
-                <div className="text-3xl font-black text-white">{(result.probability * 100).toFixed(1)}%</div>
-                <div className="text-xs text-blue-300 mt-2">Based on historical data patterns.</div>
+              <div className="mt-8 p-5 rounded-xl bg-white shadow-sm border border-gray-100">
+                <div className="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-2">Likelihood of Defaulting</div>
+                <div className="text-3xl font-black text-gray-800">{(result.probability * 100).toFixed(1)}%</div>
+                <div className="text-xs text-gray-400 mt-2">Based on historical data patterns.</div>
               </div>
 
               <div className="mt-8">
-                <div className="text-xs text-blue-200 uppercase font-semibold mb-2">Final Loan Status</div>
+                <div className="text-xs text-gray-500 uppercase font-semibold mb-2">Final Loan Status</div>
                 <div className={`text-2xl tracking-wide font-black py-4 px-6 rounded-lg text-white shadow-lg ${result.decision === 'APPROVE' ? 'bg-approve shadow-green-200' : result.decision === 'REVIEW' ? 'bg-review shadow-yellow-200' : 'bg-reject shadow-red-200'}`}>
                   {result.decision}
                 </div>
               </div>
             </div>
           ) : (
-            <div className="text-blue-100 p-8 flex flex-col items-center">
-               <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mb-4 opacity-60 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="text-gray-400 p-8 flex flex-col items-center">
+               <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mb-4 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <h3 className="text-xl font-bold text-white mb-2">No Application Submitted</h3>
-              <p className="text-sm text-blue-200">Submit the loan application form on the left to see our AI's immediate decision.</p>
+              <h3 className="text-lg font-medium text-gray-600 mb-2">No Application Submitted</h3>
+              <p className="text-sm">Submit the loan application form on the left to see our AI's immediate decision.</p>
             </div>
           )}
         </div>
