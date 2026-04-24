@@ -64,11 +64,6 @@ export default function Hero() {
           <img src="/kingston.png" alt="Kingston Engineering College" style={{ height: '50px', objectFit: 'contain' }} />
         </div>
 
-        {/* Center: Main App Logo */}
-        <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={() => navigate('/')}>
-          <img src="/logo.png" alt="Credit Score AI" style={{ height: '70px', objectFit: 'contain' }} />
-        </div>
-
         {/* Right: Anna University & Links */}
         <div className="hero-nav-links" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <img src="/anna.png" alt="Anna University" style={{ height: '50px', objectFit: 'contain', marginRight: '1rem' }} />
@@ -79,6 +74,11 @@ export default function Hero() {
 
       {/* ── Hero Content ── */}
       <section className="hero-section">
+        {/* Main App Logo Moved to Hero Section */}
+        <div style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}>
+          <img src="/logo.png" alt="Credit Score AI" style={{ height: '110px', objectFit: 'contain' }} />
+        </div>
+
         <div className="hero-badge">🚀 Next-Gen Credit Intelligence</div>
 
         <h1 className="hero-title">
