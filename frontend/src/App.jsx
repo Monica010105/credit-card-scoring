@@ -25,16 +25,17 @@ function Navigation() {
   return (
     <nav className="bg-white border-b-4 border-blue-800 text-blue-900 p-2 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center">
+        {/* Left Side: Logos & Title */}
+        <div className="flex items-center gap-4">
           {!hideLogos && <img src="/kingston.png" alt="Kingston Engineering College" className="h-16 object-contain bg-white p-1 rounded" />}
+          <Link to="/" className="flex items-center gap-2">
+            {!isAuthRoute && <img src="/logo.png" alt="Logo" className="h-10 object-contain" />}
+            {!isAuthRoute && <h1 className="text-xl font-bold tracking-tight text-blue-900">Credit Score AI</h1>}
+          </Link>
         </div>
 
-        {/* Center: Main App Logo & Title */}
+        {/* Center: (Empty) */}
         <div className="flex flex-col items-center justify-center">
-          <Link to="/" className="flex items-center gap-3">
-            {!isAuthRoute && <img src="/logo.png" alt="Logo" className="h-12 object-contain" />}
-            {!isAuthRoute && <h1 className="text-2xl font-bold tracking-tight text-blue-900">⚡ Credit Score AI</h1>}
-          </Link>
         </div>
 
         {/* Right Side: Anna University & Navigation Links */}
