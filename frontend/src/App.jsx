@@ -4,13 +4,14 @@ import AdminPanel from './components/AdminPanel';
 import AdminHistory from './components/AdminHistory';
 import Login from './components/Login';
 import Register from './components/Register';
+import ForgotPassword from './components/ForgotPassword';
 import Hero from './components/Hero';
 
 function Navigation() {
   const location = useLocation();
   const isAdmin  = location.pathname.startsWith('/admin');
   const isHero   = location.pathname === '/';
-  const isAuthRoute = location.pathname === '/login' || location.pathname === '/register';
+  const isAuthRoute = location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/forgot-password';
   const hideLogos = isAuthRoute || location.pathname === '/app' || isAdmin;
 
   const handleLogout = () => {
@@ -79,6 +80,7 @@ function App() {
             {/* Auth */}
             <Route path="/login"    element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
 
             {/* User */}
             <Route path="/app"      element={<UserPanel />} />
