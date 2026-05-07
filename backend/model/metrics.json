@@ -1,0 +1,24 @@
+{
+    "Logistic Regression": {
+        "ROC-AUC": "85.78%",
+        "Accuracy": "77.67%",
+        "Precision": "79.54%",
+        "Recall": "74.50%",
+        "F1-Score": "76.94%"
+    },
+    "Random Forest": {
+        "ROC-AUC": "94.63%",
+        "Accuracy": "87.15%",
+        "Precision": "87.10%",
+        "Recall": "87.22%",
+        "F1-Score": "87.16%"
+    },
+    "Optimized XGBoost": {
+        "ROC-AUC": "99.09%",
+        "Accuracy": "95.82%",
+        "Precision": "97.34%",
+        "Recall": "94.22%",
+        "F1-Score": "95.76%"
+    },
+    "Final Model": "Optimized XGBoost"
+}
