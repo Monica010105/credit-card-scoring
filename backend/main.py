@@ -1,6 +1,6 @@
 import os
 import json
-from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi import FastAPI, Depends, HTTPException, status, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from datetime import timedelta
@@ -32,7 +32,7 @@ app.add_middleware(
 )
 
 @app.post("/predict", response_model=schemas.PredictResponse)
-def predict(request: schemas.PredictRequest, db: Session = Depends(get_db)):
+def predict(request: schemas.PredictRequest, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
     data = request.model_dump()
     # Map the underscores from request to the dataset format expected by model
     mapped_data = {
@@ -80,10 +80,7 @@ def predict(request: schemas.PredictRequest, db: Session = Depends(get_db)):
     
     # Send prediction result email
     if hasattr(request, 'email') and request.email:
-        try:
-            send_prediction_result_email(request.email, data.get("name", "Unknown"), score, decision)
-        except Exception as e:
-            print(f"Error sending email: {e}")
+        background_tasks.add_task(send_prediction_result_email, request.email, data.get("name", "Unknown"), score, decision)
     
     return schemas.PredictResponse(
         probability=prob,
@@ -124,7 +121,7 @@ def get_password_hash(password: str) -> str:
     return hashlib.sha256(password.encode('utf-8')).hexdigest()
 
 @app.post("/register", response_model=schemas.Token)
-def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
+def register(user: schemas.UserCreate, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
     db_user = db.query(models.User).filter(models.User.email == user.email).first()
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
@@ -135,10 +132,7 @@ def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
     
-    try:
-        send_registration_email(user.email, user.name)
-    except Exception as e:
-        print(f"Error sending registration email: {e}")
+    background_tasks.add_task(send_registration_email, user.email, user.name)
     
     return {"access_token": "user_mock_jwt_token", "token_type": "bearer"}
 
