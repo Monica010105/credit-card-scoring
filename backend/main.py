@@ -18,6 +18,11 @@ except ImportError:
 
 app = FastAPI(title="Credit Scoring API", version="1.0")
 
+@app.on_event("startup")
+def startup_event():
+    print(f"[startup] SENDER_EMAIL present: {bool(os.environ.get('SENDER_EMAIL'))}")
+    print(f"[startup] SENDER_PASSWORD present: {bool(os.environ.get('SENDER_PASSWORD'))}")
+
 @app.get("/")
 def root():
     return {"message": "Credit Scoring API is running!", "docs": "/docs", "redoc": "/redoc"}
