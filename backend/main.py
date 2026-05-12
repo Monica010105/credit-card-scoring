@@ -11,7 +11,10 @@ from database.database import engine, get_db
 from schemas import schemas
 from model.predict import make_prediction, get_model
 import joblib
-from email_utils import send_registration_email, send_prediction_result_email
+try:
+    from .email_utils import send_registration_email, send_prediction_result_email
+except ImportError:
+    from email_utils import send_registration_email, send_prediction_result_email
 
 app = FastAPI(title="Credit Scoring API", version="1.0")
 
