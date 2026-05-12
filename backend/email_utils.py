@@ -19,9 +19,9 @@ SENDER_EMAIL = os.environ.get("SENDER_EMAIL")
 SENDER_PASSWORD = os.environ.get("SENDER_PASSWORD")
 
 if not SENDER_EMAIL or not SENDER_PASSWORD:
-    print("[email_utils] WARNING: SENDER_EMAIL or SENDER_PASSWORD not set.")
+    print("[email_utils] WARNING: SENDER_EMAIL or SENDER_PASSWORD not set.", flush=True)
 else:
-    print(f"[email_utils] Loaded sender email: {SENDER_EMAIL}")
+    print(f"[email_utils] Loaded sender email: {SENDER_EMAIL}", flush=True)
 
 def send_registration_email(to_email, name):
     if not SENDER_EMAIL or not SENDER_PASSWORD:
@@ -43,9 +43,9 @@ def send_registration_email(to_email, name):
             server.ehlo()
             server.login(SENDER_EMAIL, SENDER_PASSWORD)
             server.sendmail(SENDER_EMAIL, to_email, msg.as_string())
-        print(f"Registration email sent to {to_email}")
+        print(f"Registration email sent to {to_email}", flush=True)
     except Exception as e:
-        print(f"Failed to send registration email to {to_email}: {e}")
+        print(f"Failed to send registration email to {to_email}: {e}", flush=True)
 
 def send_prediction_result_email(to_email, name, score, decision):
     if not SENDER_EMAIL or not SENDER_PASSWORD:
@@ -71,6 +71,6 @@ def send_prediction_result_email(to_email, name, score, decision):
             server.ehlo()
             server.login(SENDER_EMAIL, SENDER_PASSWORD)
             server.sendmail(SENDER_EMAIL, to_email, msg.as_string())
-        print(f"Prediction result email sent to {to_email}")
+        print(f"Prediction result email sent to {to_email}", flush=True)
     except Exception as e:
-        print(f"Failed to send prediction result email to {to_email}: {e}")
+        print(f"Failed to send prediction result email to {to_email}: {e}", flush=True)
