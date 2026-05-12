@@ -15,18 +15,23 @@ else:
 
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-SENDER_EMAIL = os.environ.get("SENDER_EMAIL")
-SENDER_PASSWORD = os.environ.get("SENDER_PASSWORD")
 
-if not SENDER_EMAIL or not SENDER_PASSWORD:
+def get_smtp_credentials():
+    sender_email = os.environ.get("SENDER_EMAIL")
+    sender_password = os.environ.get("SENDER_PASSWORD")
+    return sender_email, sender_password
+
+sender_email, sender_password = get_smtp_credentials()
+if not sender_email or not sender_password:
     print("[email_utils] WARNING: SENDER_EMAIL or SENDER_PASSWORD not set.", flush=True)
 else:
-    print(f"[email_utils] Loaded sender email: {SENDER_EMAIL}", flush=True)
+    print(f"[email_utils] Loaded sender email: {sender_email}", flush=True)
 
 def send_registration_email(to_email, name):
-    if not SENDER_EMAIL or not SENDER_PASSWORD:
-        print("Email credentials not set. Skipping registration email.")
-        return
+    sender_email, sender_password = get_smtp_credentials()
+    if not sender_email or not sender_password:
+        print("Email credentials not set. Skipping registration email.", flush=True)
+        return False
         
     try:
         msg = MIMEMultipart()
@@ -41,20 +46,23 @@ def send_registration_email(to_email, name):
             server.ehlo()
             server.starttls()
             server.ehlo()
-            server.login(SENDER_EMAIL, SENDER_PASSWORD)
-            server.sendmail(SENDER_EMAIL, to_email, msg.as_string())
+            server.login(sender_email, sender_password)
+            server.sendmail(sender_email, to_email, msg.as_string())
         print(f"Registration email sent to {to_email}", flush=True)
+        return True
     except Exception as e:
         print(f"Failed to send registration email to {to_email}: {e}", flush=True)
+        return False
 
 def send_prediction_result_email(to_email, name, score, decision):
-    if not SENDER_EMAIL or not SENDER_PASSWORD:
-        print("Email credentials not set. Skipping prediction result email.")
-        return
+    sender_email, sender_password = get_smtp_credentials()
+    if not sender_email or not sender_password:
+        print("Email credentials not set. Skipping prediction result email.", flush=True)
+        return False
         
     if not to_email:
-        print("No email provided for prediction result.")
-        return
+        print("No email provided for prediction result.", flush=True)
+        return False
         
     try:
         msg = MIMEMultipart()
@@ -69,8 +77,10 @@ def send_prediction_result_email(to_email, name, score, decision):
             server.ehlo()
             server.starttls()
             server.ehlo()
-            server.login(SENDER_EMAIL, SENDER_PASSWORD)
-            server.sendmail(SENDER_EMAIL, to_email, msg.as_string())
+            server.login(sender_email, sender_password)
+            server.sendmail(sender_email, to_email, msg.as_string())
         print(f"Prediction result email sent to {to_email}", flush=True)
+        return True
     except Exception as e:
         print(f"Failed to send prediction result email to {to_email}: {e}", flush=True)
+        return False

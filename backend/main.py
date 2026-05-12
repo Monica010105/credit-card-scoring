@@ -140,8 +140,9 @@ def register(user: schemas.UserCreate, background_tasks: BackgroundTasks, db: Se
     db.commit()
     db.refresh(new_user)
     
-    print(f"[register] Registered user {user.email}, scheduling email", flush=True)
-    background_tasks.add_task(send_registration_email, user.email, user.name)
+    print(f"[register] Registered user {user.email}, sending email now", flush=True)
+    email_sent = send_registration_email(user.email, user.name)
+    print(f"[register] Email send result for {user.email}: {email_sent}", flush=True)
     
     return {"access_token": "user_mock_jwt_token", "token_type": "bearer"}
 
