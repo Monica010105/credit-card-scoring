@@ -35,7 +35,7 @@ def send_registration_email(to_email, name):
         
     try:
         msg = MIMEMultipart()
-        msg['From'] = SENDER_EMAIL
+        msg['From'] = sender_email
         msg['To'] = to_email
         msg['Subject'] = "Welcome to Credit Scoring App!"
         
@@ -66,7 +66,7 @@ def send_prediction_result_email(to_email, name, score, decision):
         
     try:
         msg = MIMEMultipart()
-        msg['From'] = SENDER_EMAIL
+        msg['From'] = sender_email
         msg['To'] = to_email
         msg['Subject'] = "Your Credit Score Result"
         
